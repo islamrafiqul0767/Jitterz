@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Coffee, Leaf, Croissant, GlassWater } from "lucide-react";
-import { business, highlights, images, menuCategories } from "../data/business";
+import { ArrowRight, MapPin, Coffee, Leaf, Croissant, GlassWater, Star } from "lucide-react";
+import { business, highlights, images, reviewData, reviewExcerpts } from "../data/business";
+import { ImageWithFallback } from "../components/ImageWithFallback";
 
 const iconMap: Record<string, React.ReactNode> = {
   coffee: <Coffee size={28} strokeWidth={1.5} />,
@@ -14,22 +15,19 @@ export function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <ImageWithFallback
             src={images.hero}
             alt="A beautifully prepared latte on a wooden café table with warm morning light"
             className="w-full h-full object-cover"
-            loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-espresso/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso/85 via-espresso/60 to-espresso/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-espresso/20" />
         </div>
 
-        {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40">
           <div className="max-w-2xl">
-            <p className="animate-fade-in-up text-caramel text-sm uppercase tracking-widest font-medium mb-4">
+            <p className="animate-fade-in-up text-copper text-sm uppercase tracking-[0.2em] font-medium mb-4">
               Downtown Dubuque, Iowa
             </p>
             <h1 className="animate-fade-in-up animation-delay-200 font-serif text-4xl sm:text-5xl lg:text-7xl text-cream leading-[1.1]">
@@ -41,7 +39,7 @@ export function HomePage() {
             <div className="animate-fade-in-up animation-delay-600 mt-10 flex flex-col sm:flex-row gap-4">
               <Link
                 to="/menu"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-caramel text-paper font-medium rounded-full hover:bg-terracotta transition-all hover:shadow-lg hover:shadow-caramel/20 text-base"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-caramel text-cream font-medium rounded-full hover:bg-copper transition-all hover:shadow-lg hover:shadow-caramel/20 text-base"
               >
                 Explore the Menu
                 <ArrowRight size={18} />
@@ -58,23 +56,14 @@ export function HomePage() {
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-cream/30 rounded-full flex items-start justify-center p-1.5">
-            <div className="w-1.5 h-2.5 bg-cream/50 rounded-full" />
-          </div>
-        </div>
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 sm:py-28 bg-paper">
+      <section className="py-20 sm:py-28 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <p className="text-caramel text-sm uppercase tracking-widest font-medium mb-3">
-                Welcome
-              </p>
+              <p className="text-caramel text-sm uppercase tracking-[0.2em] font-medium mb-3">Welcome</p>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-espresso leading-tight">
                 Your neighborhood café on Main Street.
               </h2>
@@ -91,7 +80,7 @@ export function HomePage() {
                 </p>
               </div>
               <Link
-                to="/our-cafe"
+                to="/about"
                 className="inline-flex items-center gap-2 mt-8 text-caramel font-medium hover:text-terracotta transition-colors group"
               >
                 Learn more about us
@@ -99,28 +88,25 @@ export function HomePage() {
               </Link>
             </div>
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-espresso/10">
-                <img
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-espresso/20">
+                <ImageWithFallback
                   src={images.interior}
                   alt="Warm café interior with wooden furniture, plants, and natural light"
                   className="w-full h-full object-cover"
-                  loading="lazy"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-butter/30 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-sage/20 rounded-full -z-10" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-copper/20 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-olive/15 rounded-full -z-10" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Highlights Section */}
-      <section className="py-20 sm:py-28 bg-cream">
+      <section className="py-20 sm:py-28 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-caramel text-sm uppercase tracking-widest font-medium mb-3">
-              What We Offer
-            </p>
+            <p className="text-caramel text-sm uppercase tracking-[0.2em] font-medium mb-3">What We Offer</p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-espresso">
               Crafted with care, served with warmth.
             </h2>
@@ -129,17 +115,13 @@ export function HomePage() {
             {highlights.map((item, index) => (
               <div
                 key={item.title}
-                className="group bg-paper rounded-2xl p-7 hover:shadow-xl hover:shadow-espresso/5 transition-all duration-300 hover:-translate-y-1"
+                className="group bg-cream rounded-2xl p-7 hover:shadow-xl hover:shadow-espresso/10 transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-caramel/10 to-terracotta/10 text-caramel mb-5 group-hover:scale-110 transition-transform">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-caramel/15 to-terracotta/15 text-caramel mb-5 group-hover:scale-110 transition-transform">
                   {iconMap[item.icon]}
                 </div>
-                <h3 className="font-serif text-xl text-espresso mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-espresso/60 text-sm leading-relaxed">
-                  {item.description}
-                </p>
+                <h3 className="font-serif text-xl text-espresso mb-2">{item.title}</h3>
+                <p className="text-espresso/60 text-sm leading-relaxed">{item.description}</p>
                 {index === 0 && (
                   <Link
                     to="/menu"
@@ -155,36 +137,33 @@ export function HomePage() {
       </section>
 
       {/* Photo Feature Section */}
-      <section className="py-20 sm:py-28 bg-paper">
+      <section className="py-20 sm:py-28 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="lg:row-span-2">
               <div className="h-full min-h-[300px] lg:min-h-[500px] rounded-2xl overflow-hidden group">
-                <img
+                <ImageWithFallback
                   src={images.espresso}
                   alt="Professional espresso preparation with warm highlights"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
                 />
               </div>
             </div>
             <div>
               <div className="h-full min-h-[240px] rounded-2xl overflow-hidden group">
-                <img
+                <ImageWithFallback
                   src={images.bakery}
                   alt="Freshly baked croissants, muffins, and pastries on a bakery counter"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
                 />
               </div>
             </div>
             <div>
               <div className="h-full min-h-[240px] rounded-2xl overflow-hidden group">
-                <img
+                <ImageWithFallback
                   src={images.icedCoffee}
                   alt="Refreshing iced coffee in natural morning light"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
                 />
               </div>
             </div>
@@ -192,7 +171,7 @@ export function HomePage() {
           <div className="text-center mt-10">
             <Link
               to="/gallery"
-              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-espresso/15 text-espresso font-medium rounded-full hover:bg-espresso hover:text-paper transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-espresso/15 text-espresso font-medium rounded-full hover:bg-espresso hover:text-cream transition-all"
             >
               View Gallery
               <ArrowRight size={16} />
@@ -201,46 +180,52 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Menu Preview */}
-      <section className="py-20 sm:py-28 bg-cream">
+      {/* Reviews Preview */}
+      <section className="py-20 sm:py-28 bg-espresso text-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative order-2 lg:order-1">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src={images.cinnamonRolls}
-                  alt="Freshly baked cinnamon rolls with cream cheese icing"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+          <div className="text-center mb-12">
+            <p className="text-copper text-sm uppercase tracking-[0.2em] font-medium mb-3">What Customers Say</p>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl">
+              Loved by the community.
+            </h2>
+            <div className="mt-6 flex items-center justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Star size={16} className="text-copper fill-copper" />
+                <span>{reviewData.restaurantji.rating}/5 on Restaurantji</span>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-caramel text-paper px-5 py-3 rounded-xl shadow-lg">
-                <p className="font-serif text-lg">Fresh Daily</p>
+              <div className="flex items-center gap-2">
+                <Star size={16} className="text-copper fill-copper" />
+                <span>{reviewData.yelp.rating}/5 on Yelp</span>
               </div>
             </div>
-            <div className="order-1 lg:order-2">
-              <p className="text-caramel text-sm uppercase tracking-widest font-medium mb-3">
-                Our Menu
-              </p>
-              <h2 className="font-serif text-3xl sm:text-4xl text-espresso leading-tight">
-                Something for every mood.
-              </h2>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {menuCategories.slice(0, 4).map((cat) => (
-                  <div key={cat.id} className="flex items-center gap-3 p-3 bg-paper rounded-xl">
-                    <span className="w-2 h-2 rounded-full bg-caramel flex-shrink-0" />
-                    <span className="text-sm font-medium text-espresso">{cat.name}</span>
-                  </div>
-                ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {reviewExcerpts.map((excerpt, index) => (
+              <div key={index} className="bg-roasted/50 rounded-2xl p-6 border border-cream/5">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="text-copper fill-copper" />
+                  ))}
+                </div>
+                <p className="text-cream/80 text-sm leading-relaxed italic mb-4">
+                  "{excerpt.text}"
+                </p>
+                <p className="text-cream/40 text-xs">
+                  — {excerpt.source}, {excerpt.date}
+                </p>
               </div>
-              <Link
-                to="/menu"
-                className="inline-flex items-center gap-2 mt-8 text-caramel font-medium hover:text-terracotta transition-colors group"
-              >
-                See the full menu
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              to="/reviews"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-caramel text-cream font-medium rounded-full hover:bg-copper transition-colors"
+            >
+              Read More Reviews
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
@@ -248,13 +233,12 @@ export function HomePage() {
       {/* Visit CTA */}
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <ImageWithFallback
             src={images.storefront}
             alt="Charming neighborhood café storefront"
             className="w-full h-full object-cover"
-            loading="lazy"
           />
-          <div className="absolute inset-0 bg-espresso/75" />
+          <div className="absolute inset-0 bg-espresso/80" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-cream leading-tight">
@@ -269,7 +253,7 @@ export function HomePage() {
               href={business.googleMaps}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-caramel text-paper font-medium rounded-full hover:bg-terracotta transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-caramel text-cream font-medium rounded-full hover:bg-copper transition-all"
             >
               <MapPin size={18} />
               Get Directions
