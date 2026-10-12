@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { images, imageDisclaimer } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection } from "../utils/animations";
 
 const galleryImages = [
   { src: images.hero, alt: "Warm latte in a ceramic cup on a wooden table", caption: "Morning Ritual", span: "tall" },
@@ -32,9 +34,25 @@ export function GalleryPage() {
 
       <section className="py-12 sm:py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+          <motion.div 
+            className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+          >
             {galleryImages.map((img, index) => (
-              <figure key={index} className="group relative overflow-hidden rounded-xl break-inside-avoid">
+              <motion.figure
+                key={index}
+                className="group relative overflow-hidden rounded-xl break-inside-avoid"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                }}
+              >
                 <div className={`${
                   img.span === 'tall' ? 'aspect-[3/4]' :
                   img.span === 'wide' ? 'aspect-[4/3]' :
@@ -49,9 +67,9 @@ export function GalleryPage() {
                 <figcaption className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                   <p className="text-cream text-sm font-medium">{img.caption}</p>
                 </figcaption>
-              </figure>
+              </motion.figure>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-12 text-center">
             <p className="text-xs text-espresso/40 italic max-w-lg mx-auto">{imageDisclaimer}</p>

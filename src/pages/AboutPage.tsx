@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
 import { business, images } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection } from "../utils/animations";
 
 export function AboutPage() {
   return (
@@ -24,7 +25,7 @@ export function AboutPage() {
       <section className="py-16 sm:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <div className="lg:col-span-5 space-y-8">
+            <AnimatedSection className="lg:col-span-5 space-y-8">
               <div>
                 <h2 className="font-serif text-2xl sm:text-3xl text-espresso leading-snug">
                   Coffee, community, and a little Main Street charm.
@@ -80,9 +81,9 @@ export function AboutPage() {
                 Explore the full menu
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-            </div>
+            </AnimatedSection>
 
-            <div className="lg:col-span-7 space-y-6">
+            <AnimatedSection delay={0.2} className="lg:col-span-7 space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden">
                   <ImageWithFallback
@@ -106,7 +107,7 @@ export function AboutPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

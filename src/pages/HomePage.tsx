@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Coffee, Leaf, Croissant, GlassWater, Star } from "lucide-react";
 import { business, highlights, images, reviewData, reviewExcerpts } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection, AnimatedText, staggerContainer, fadeInUp } from "../utils/animations";
 
 const iconMap: Record<string, React.ReactNode> = {
   coffee: <Coffee size={28} strokeWidth={1.5} />,
@@ -26,35 +28,61 @@ export function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40">
-          <div className="max-w-2xl">
-            <p className="animate-fade-in-up text-copper text-sm uppercase tracking-[0.2em] font-medium mb-4">
+          <motion.div 
+            className="max-w-2xl"
+            initial="initial"
+            animate="animate"
+            variants={staggerContainer}
+          >
+            <motion.p 
+              variants={fadeInUp}
+              className="text-copper text-sm uppercase tracking-[0.2em] font-medium mb-4"
+            >
               Downtown Dubuque, Iowa
-            </p>
-            <h1 className="animate-fade-in-up animation-delay-200 font-serif text-4xl sm:text-5xl lg:text-7xl text-cream leading-[1.1]">
-              {business.tagline}
-            </h1>
-            <p className="animate-fade-in-up animation-delay-400 mt-6 text-lg sm:text-xl text-cream/80 leading-relaxed max-w-lg">
+            </motion.p>
+            <motion.h1 
+              variants={fadeInUp}
+              className="font-serif text-4xl sm:text-5xl lg:text-7xl text-cream leading-[1.1]"
+            >
+              <AnimatedText>{business.tagline}</AnimatedText>
+            </motion.h1>
+            <motion.p 
+              variants={fadeInUp}
+              className="mt-6 text-lg sm:text-xl text-cream/80 leading-relaxed max-w-lg"
+            >
               {business.description}
-            </p>
-            <div className="animate-fade-in-up animation-delay-600 mt-10 flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/menu"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-caramel text-cream font-medium rounded-full hover:bg-copper transition-all hover:shadow-lg hover:shadow-caramel/20 text-base"
-              >
-                Explore the Menu
-                <ArrowRight size={18} />
-              </Link>
-              <a
-                href={business.googleMaps}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-cream/40 text-cream font-medium rounded-full hover:bg-cream/10 hover:border-cream/60 transition-all text-base"
-              >
-                <MapPin size={18} />
-                Get Directions
-              </a>
-            </div>
-          </div>
+            </motion.p>
+            <motion.div 
+              variants={fadeInUp}
+              className="mt-10 flex flex-col sm:flex-row gap-4"
+            >
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  to="/menu"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-caramel text-cream font-medium rounded-full hover:bg-copper transition-all hover:shadow-lg hover:shadow-caramel/20 text-base"
+                >
+                  Explore the Menu
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.span>
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                <a
+                  href={business.googleMaps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-cream/40 text-cream font-medium rounded-full hover:bg-cream/10 hover:border-cream/60 transition-all text-base"
+                >
+                  <MapPin size={18} />
+                  Get Directions
+                </a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -62,7 +90,7 @@ export function HomePage() {
       <section className="py-20 sm:py-28 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div>
+            <AnimatedSection>
               <p className="text-caramel text-sm uppercase tracking-[0.2em] font-medium mb-3">Welcome</p>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-espresso leading-tight">
                 Your neighborhood café on Main Street.
@@ -86,18 +114,20 @@ export function HomePage() {
                 Learn more about us
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-            </div>
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-espresso/20">
-                <ImageWithFallback
-                  src={images.interior}
-                  alt="Warm café interior with wooden furniture, plants, and natural light"
-                  className="w-full h-full object-cover"
-                />
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="relative">
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-espresso/20">
+                  <ImageWithFallback
+                    src={images.interior}
+                    alt="Warm café interior with wooden furniture, plants, and natural light"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-copper/20 rounded-2xl -z-10" />
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-olive/15 rounded-full -z-10" />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-copper/20 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-olive/15 rounded-full -z-10" />
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

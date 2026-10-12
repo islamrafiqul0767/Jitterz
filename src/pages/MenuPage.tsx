@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { menuCategories, menuNote, images } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection } from "../utils/animations";
 
 export function MenuPage() {
   const [activeCategory, setActiveCategory] = useState<string>(menuCategories[0].id);
@@ -64,17 +66,32 @@ export function MenuPage() {
                 <h2 className="font-serif text-2xl sm:text-3xl text-espresso">{activeCat.name}</h2>
                 <p className="mt-2 text-espresso/60">{activeCat.description}</p>
               </div>
-              <div className="space-y-1">
-                {activeCat.items.map((item) => (
-                  <div key={item.name} className="group flex items-center justify-between py-4 px-4 rounded-xl hover:bg-ivory/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-caramel/60 group-hover:bg-caramel transition-colors" />
-                      <span className="text-base sm:text-lg text-espresso font-medium">{item.name}</span>
-                    </div>
-                    {item.note && <span className="text-sm text-espresso/40 italic">{item.note}</span>}
-                  </div>
-                ))}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCategory}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-1"
+                >
+                  {activeCat.items.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="group flex items-center justify-between py-4 px-4 rounded-xl hover:bg-ivory/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-caramel/60 group-hover:bg-caramel transition-colors" />
+                        <span className="text-base sm:text-lg text-espresso font-medium">{item.name}</span>
+                      </div>
+                      {item.note && <span className="text-sm text-espresso/40 italic">{item.note}</span>}
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
               <div className="mt-12 pt-8 border-t border-espresso/5 flex items-center justify-between">
                 {menuCategories.findIndex(c => c.id === activeCategory) > 0 ? (
                   <button onClick={() => {

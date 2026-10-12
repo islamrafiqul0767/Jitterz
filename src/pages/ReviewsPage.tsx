@@ -2,6 +2,7 @@ import { Star, ExternalLink, Coffee, Croissant, Heart, Home, BookOpen, Users } f
 import { Link } from "react-router-dom";
 import { reviewData, reviewThemes, reviewExcerpts, images } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection } from "../utils/animations";
 
 const themeIconMap: Record<string, React.ReactNode> = {
   coffee: <Coffee size={24} strokeWidth={1.5} />,
@@ -35,6 +36,7 @@ export function ReviewsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Restaurantji */}
+            <AnimatedSection>
             <div className="bg-ivory rounded-2xl p-6 border border-espresso/5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-medium text-espresso text-sm">Restaurantji</h3>
@@ -69,8 +71,10 @@ export function ReviewsPage() {
                 Read all reviews <ExternalLink size={12} />
               </a>
             </div>
+            </AnimatedSection>
 
             {/* Yelp */}
+            <AnimatedSection delay={0.1}>
             <div className="bg-ivory rounded-2xl p-6 border border-espresso/5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-medium text-espresso text-sm">Yelp</h3>
@@ -91,8 +95,10 @@ export function ReviewsPage() {
                 Read on Yelp <ExternalLink size={12} />
               </a>
             </div>
+            </AnimatedSection>
 
             {/* Tripadvisor */}
+            <AnimatedSection delay={0.2}>
             <div className="bg-ivory rounded-2xl p-6 border border-espresso/5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-medium text-espresso text-sm">Tripadvisor</h3>
@@ -113,6 +119,7 @@ export function ReviewsPage() {
                 Read on Tripadvisor <ExternalLink size={12} />
               </a>
             </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

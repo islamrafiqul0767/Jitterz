@@ -1,6 +1,7 @@
 import { MapPin, Phone, Facebook, Clock, ExternalLink, Navigation } from "lucide-react";
 import { business, hours, images } from "../data/business";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { AnimatedSection } from "../utils/animations";
 
 export function VisitPage() {
   return (
@@ -21,6 +22,7 @@ export function VisitPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="space-y-8">
+              <AnimatedSection>
               <div className="bg-ivory rounded-2xl p-6 sm:p-8 border border-espresso/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center">
@@ -34,7 +36,9 @@ export function VisitPage() {
                   <Navigation size={14} /> Get Directions
                 </a>
               </div>
+              </AnimatedSection>
 
+              <AnimatedSection delay={0.1}>
               <div className="bg-ivory rounded-2xl p-6 sm:p-8 border border-espresso/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center">
@@ -50,7 +54,9 @@ export function VisitPage() {
                   <Phone size={14} /> Call the Café
                 </a>
               </div>
+              </AnimatedSection>
 
+              <AnimatedSection delay={0.2}>
               <div className="bg-ivory rounded-2xl p-6 sm:p-8 border border-espresso/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center">
@@ -65,9 +71,11 @@ export function VisitPage() {
                 </a>
                 <p className="mt-2 text-sm text-espresso/50">Stay updated with the latest from Jitterz.</p>
               </div>
+              </AnimatedSection>
             </div>
 
             <div className="space-y-8">
+              <AnimatedSection delay={0.1}>
               <div className="bg-ivory rounded-2xl p-6 sm:p-8 border border-espresso/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center">
@@ -84,7 +92,9 @@ export function VisitPage() {
                   ))}
                 </div>
               </div>
+              </AnimatedSection>
 
+              <AnimatedSection delay={0.2}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ivory">
                 <ImageWithFallback src={images.storefront} alt="Neighborhood café storefront on a charming Main Street" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent" />
@@ -97,6 +107,7 @@ export function VisitPage() {
                   </a>
                 </div>
               </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>

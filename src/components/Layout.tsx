@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Gallery", to: "/gallery" },
   { label: "Reviews", to: "/reviews" },
   { label: "Visit", to: "/visit" },
+  { label: "FAQ", to: "/faq" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -191,6 +192,9 @@ function SiteFooter() {
                     <Link to={link.to} className="text-sm text-cream/40 hover:text-copper transition-colors">{link.label}</Link>
                   </li>
                 ))}
+                <li>
+                  <Link to="/privacy" className="text-sm text-cream/40 hover:text-copper transition-colors">Privacy</Link>
+                </li>
               </ul>
             </nav>
           </div>
